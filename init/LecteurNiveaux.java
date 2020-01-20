@@ -81,7 +81,6 @@ public class LecteurNiveaux {
 		ArrayList<Niveau> tab = new ArrayList<>();
 		
 		try {
-			System.out.println(this.entree.available());
 			while(this.entree.available() >= 1) {
 				tab.add(this.lisProchainNiveau());
 			}
