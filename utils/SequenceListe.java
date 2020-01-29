@@ -15,6 +15,14 @@ public class SequenceListe implements Sequence {
 		this.taille = 1;
 	}
 
+	public Noeud getRacine() {
+		return racine;
+	}
+
+	public void setRacine(Noeud racine) {
+		this.racine = racine;
+	}
+
 	@Override
 	public void insereTete(int element) {
 		this.racine = new Noeud(element, this.racine);
@@ -47,6 +55,11 @@ public class SequenceListe implements Sequence {
 	public boolean estVide() {
 		return (this.taille == 0);
 	}
+	
+	@Override
+	public Iterateur iterateur() {
+		return new IterateurSequenceListe(this);
+	}
 
 	@Override
 	public String toString() {
@@ -67,6 +80,4 @@ public class SequenceListe implements Sequence {
 		
 		return res;
 	}
-	
-	
 }

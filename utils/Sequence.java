@@ -5,4 +5,5 @@ public interface Sequence {
 	void insereQueue(int element);
 	int extraitTete() throws RuntimeException;
 	boolean estVide();
+	Iterateur iterateur();
 }

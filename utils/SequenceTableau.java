@@ -6,6 +6,14 @@ public class SequenceTableau implements Sequence{
 	
 	private ArrayList<Integer> tableau;
 	
+	public ArrayList<Integer> getTableau() {
+		return tableau;
+	}
+
+	public void setTableau(ArrayList<Integer> tableau) {
+		this.tableau = tableau;
+	}
+
 	public SequenceTableau() {
 		tableau = new ArrayList<>();
 	}
@@ -41,6 +49,12 @@ public class SequenceTableau implements Sequence{
 	@Override
 	public boolean estVide() {
 		return tableau.isEmpty();
+	}
+
+
+	@Override
+	public Iterateur iterateur() {
+		return new IterateurSequenceTableau(this);
 	}
 
 	@Override
