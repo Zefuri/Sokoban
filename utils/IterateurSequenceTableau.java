@@ -1,12 +1,12 @@
 package utils;
 
-public class IterateurSequenceTableau implements Iterateur {
+public class IterateurSequenceTableau<Type> implements Iterateur<Type> {
 	
-	private SequenceTableau tableau;
+	private SequenceTableau<Type> tableau;
 	private int pos;
 	private boolean supprimable;
 	
-	public IterateurSequenceTableau(SequenceTableau tableau) {
+	public IterateurSequenceTableau(SequenceTableau<Type> tableau) {
 		this.tableau = tableau;
 		this.pos = 0;
 		this.supprimable = false;
@@ -18,7 +18,7 @@ public class IterateurSequenceTableau implements Iterateur {
 	}
 
 	@Override
-	public int prochain() {
+	public Type prochain() {
 		if (!aProchain()) {
 			throw new IllegalStateException("Pas de prochain à acceder");
 		}

@@ -1,7 +1,7 @@
 package utils;
 
-public interface Iterateur {
+public interface Iterateur<Type> {
 	public boolean aProchain();
-	public int prochain();
+	public Type prochain();
 	public void supprime();
 }

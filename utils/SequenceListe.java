@@ -1,8 +1,8 @@
 package utils;
 
-public class SequenceListe implements Sequence {
+public class SequenceListe<Type> implements Sequence<Type> {
 	
-	private Noeud racine;
+	private Noeud<Type> racine;
 	private int taille;
 	
 	public SequenceListe() {
@@ -10,41 +10,41 @@ public class SequenceListe implements Sequence {
 		this.taille = 0;
 	}
 	
-	public SequenceListe(int element) {
-		this.racine = new Noeud(element, null);
+	public SequenceListe(Type element) {
+		this.racine = new Noeud<>(element, null);
 		this.taille = 1;
 	}
 
-	public Noeud getRacine() {
+	public Noeud<Type> getRacine() {
 		return racine;
 	}
 
-	public void setRacine(Noeud racine) {
+	public void setRacine(Noeud<Type> racine) {
 		this.racine = racine;
 	}
 
 	@Override
-	public void insereTete(int element) {
-		this.racine = new Noeud(element, this.racine);
+	public void insereTete(Type element) {
+		this.racine = new Noeud<>(element, this.racine);
 		this.taille++;
 	}
 
 	@Override
-	public void insereQueue(int element) {
-		Noeud noeudCourant = this.racine;
+	public void insereQueue(Type element) {
+		Noeud<Type> noeudCourant = this.racine;
 		for(int i = 0; i < this.taille-1; i++) {
 			noeudCourant = noeudCourant.getProchain();
 		}
-		noeudCourant.setProchain(new Noeud(element, null));
+		noeudCourant.setProchain(new Noeud<>(element, null));
 		this.taille++;
 	}
 
 	@Override
-	public int extraitTete() throws RuntimeException {
+	public Type extraitTete() throws RuntimeException {
 		if(taille == 0) {
 			throw new RuntimeException("Séquence vide");
 		} else {
-			int value = this.racine.getValue();
+			Type value = this.racine.getValue();
 			this.racine = this.racine.getProchain();
 			this.taille--;
 			return value;
@@ -57,15 +57,15 @@ public class SequenceListe implements Sequence {
 	}
 	
 	@Override
-	public Iterateur iterateur() {
-		return new IterateurSequenceListe(this);
+	public Iterateur<Type> iterateur() {
+		return new IterateurSequenceListe<>(this);
 	}
 
 	@Override
 	public String toString() {
 		String res = new String("[");
 		
-		Noeud noeudCourant = this.racine;
+		Noeud<Type> noeudCourant = this.racine;
 		for(int i = 0; i < this.taille; i++) {
 			res += noeudCourant.getValue();
 			

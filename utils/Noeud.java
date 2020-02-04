@@ -1,25 +1,25 @@
 package utils;
 
-public class Noeud {
-	private int value;
-	private Noeud prochain;
+public class Noeud<Type> {
+	private Type value;
+	private Noeud<Type> prochain;
 	
 	
-	public Noeud(int value, Noeud prochain) {
+	public Noeud(Type value, Noeud<Type> prochain) {
 		this.value = value;
 		this.prochain = prochain;
 	}
 	
-	public int getValue() {
+	public Type getValue() {
 		return value;
 	}
-	public void setValue(int value) {
+	public void setValue(Type value) {
 		this.value = value;
 	}
-	public Noeud getProchain() {
+	public Noeud<Type> getProchain() {
 		return prochain;
 	}
-	public void setProchain(Noeud prochain) {
+	public void setProchain(Noeud<Type> prochain) {
 		this.prochain = prochain;
 	}
 	

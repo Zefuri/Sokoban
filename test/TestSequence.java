@@ -6,9 +6,9 @@ import utils.SequenceTableau;
 
 public class TestSequence {
 	
-	private Sequence s;
+	private Sequence<Integer> s;
 	
-	public TestSequence(Sequence s) {
+	public TestSequence(Sequence<Integer> s) {
 		this.s = s;
 	}
 	
@@ -37,8 +37,8 @@ public class TestSequence {
 	}
 	
 	public static void main(String[] args) {
-		TestSequence liste = new TestSequence(new SequenceListe(1));
-		TestSequence tableau = new TestSequence(new SequenceTableau(1));
+		TestSequence liste = new TestSequence(new SequenceListe<>(1));
+		TestSequence tableau = new TestSequence(new SequenceTableau<>(1));
 		
 		liste.runTest();
 		tableau.runTest();

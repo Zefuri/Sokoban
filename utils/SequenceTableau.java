@@ -2,15 +2,15 @@ package utils;
 
 import java.util.ArrayList;
 
-public class SequenceTableau implements Sequence{
+public class SequenceTableau<Type> implements Sequence<Type>{
 	
-	private ArrayList<Integer> tableau;
+	private ArrayList<Type> tableau;
 	
-	public ArrayList<Integer> getTableau() {
+	public ArrayList<Type> getTableau() {
 		return tableau;
 	}
 
-	public void setTableau(ArrayList<Integer> tableau) {
+	public void setTableau(ArrayList<Type> tableau) {
 		this.tableau = tableau;
 	}
 
@@ -18,29 +18,29 @@ public class SequenceTableau implements Sequence{
 		tableau = new ArrayList<>();
 	}
 	
-	public SequenceTableau(int element) {
+	public SequenceTableau(Type element) {
 		tableau = new ArrayList<>();
 		tableau.add(element);
 	}
 
 	@Override
-	public void insereTete(int element) {
+	public void insereTete(Type element) {
 		tableau.add(0, element);
 		
 	}
 
 	@Override
-	public void insereQueue(int element) {
+	public void insereQueue(Type element) {
 		tableau.add(element);
 		
 	}
 
 	@Override
-	public int extraitTete() throws RuntimeException {
+	public Type extraitTete() throws RuntimeException {
 		if(this.tableau.isEmpty()) {
 			throw new RuntimeException("Séquence vide");
 		} else {
-			int value = tableau.get(0);
+			Type value = tableau.get(0);
 			tableau.remove(0);
 			return value;
 		}
@@ -53,15 +53,14 @@ public class SequenceTableau implements Sequence{
 
 
 	@Override
-	public Iterateur iterateur() {
-		return new IterateurSequenceTableau(this);
+	public Iterateur<Type> iterateur() {
+		return new IterateurSequenceTableau<>(this);
 	}
 
 	@Override
 	public String toString() {
 		return this.tableau.toString();
 	}
-	
 	
 
 }
