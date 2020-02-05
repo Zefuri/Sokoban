@@ -1,8 +1,8 @@
 package test;
 
-import utils.Sequence;
-import utils.SequenceListe;
-import utils.SequenceTableau;
+import structure.Sequence;
+import structure.SequenceListe;
+import structure.SequenceTableau;
 
 public class TestSequence {
 	
