@@ -6,6 +6,7 @@ public enum Case {
 	CAISSE('$'),
 	BUT('.'),
 	POUSSEUR('@'),
+	POUSSEUR_SUR_BUT('+'),
 	CAISSE_SUR_BUT('*');
 	
 	private final char id;

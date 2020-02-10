@@ -91,4 +91,8 @@ public class Niveau {
 	public void removeLine(int i) {
 		this.grille.remove(i);
 	}
+	
+	public Case getCase(int i, int j) {
+		return this.grille.get(i).get(j);
+	}
 }
