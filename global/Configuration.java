@@ -17,7 +17,7 @@ public class Configuration {
 	private Properties config;
 	
 	private Configuration() throws IOException {
-		FileInputStream fDefaultConfig = new FileInputStream(Variables.DEFAULT_PATH.getValue());
+		FileInputStream fDefaultConfig = (FileInputStream) getClass().getResourceAsStream("/defaut.cfg");
 		Properties defaultConfig = new Properties();
 		defaultConfig.load(fDefaultConfig);
 		

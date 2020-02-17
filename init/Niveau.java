@@ -5,6 +5,8 @@ public class Niveau {
 	
 	private String nom;
 	private ArrayList<ArrayList<Case>> grille;
+	private int pousseurX;
+	private int pousseurY;
 	
 	public Niveau() {
 		this.grille = new ArrayList<>();
@@ -12,6 +14,21 @@ public class Niveau {
 	
 	public void fixeNom(String s) {
 		this.nom = s;
+	}
+	public int getPousseurX() {
+		return pousseurX;
+	}
+
+	public void setPousseurX(int pousseurX) {
+		this.pousseurX = pousseurX;
+	}
+
+	public int getPousseurY() {
+		return pousseurY;
+	}
+
+	public void setPousseurY(int pousseurY) {
+		this.pousseurY = pousseurY;
 	}
 	
 	/* ----- USELESS ----- */
@@ -40,7 +57,7 @@ public class Niveau {
 		this.grille.get(i).add(j, c);
 	}
 	
-	public int getColonnes() {
+	public int getColonneMax() {
 		int max = 0;
 		for(int i = 0; i < this.grille.size(); i++) {
 			if(max < this.grille.get(i).size()) {
@@ -48,6 +65,10 @@ public class Niveau {
 			}
 		}
 		return max;
+	}
+	
+	public int getColonne(int i) {
+		return grille.get(i).size();
 	}
 	
 	public int getLignes() {

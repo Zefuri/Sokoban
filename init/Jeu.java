@@ -1,6 +1,5 @@
 package init;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +10,7 @@ public class Jeu {
 	private int indexNiveau;
 
 	public Jeu() throws FileNotFoundException, IOException {
-		InputStream is = new FileInputStream("/home/c/ciprianu/eclipse-workspace/Sokoban/src/level.txt");
+		InputStream is = getClass().getResourceAsStream("/level.txt");
 		LecteurNiveaux lecteur = new LecteurNiveaux(is);
 		
 		this.niveaux = lecteur.lisTousNiveaux();

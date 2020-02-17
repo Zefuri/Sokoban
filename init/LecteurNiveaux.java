@@ -44,6 +44,8 @@ public class LecteurNiveaux {
 					break;
 				case '@' :
 					n.addCase(i, j, Case.POUSSEUR);
+					n.setPousseurX(j);
+					n.setPousseurY(i);
 					j++;
 					break;
 				case '*' :
