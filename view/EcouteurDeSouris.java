@@ -28,7 +28,12 @@ public class EcouteurDeSouris implements MouseListener {
 		if ((posX == jeu.niveau().getPousseurX()-1 || posX == jeu.niveau().getPousseurX()+1) && (posY == jeu.niveau().getPousseurY())
 			|| (posY == jeu.niveau().getPousseurY()-1 || posY == jeu.niveau().getPousseurY()+1) && (posX == jeu.niveau().getPousseurX())) { // user clicked next to the pusher
 			
-			jeu.niveau().move(posX, posY);
+			if (jeu.niveau().move(posX, posY)) {
+				((NiveauGraphique) e.getComponent()).resetLevel();
+				if (!jeu.prochainNiveau()) {
+					System.out.println("Tous les niveaux sont finis, veuillez fermer la fenêtre maître. uWu");
+				}
+			}
 		}
 		e.getComponent().repaint();
 	}

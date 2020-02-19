@@ -19,6 +19,14 @@ public class Niveau {
 		return pousseurX;
 	}
 
+	public ArrayList<ArrayList<Case>> getGrille() {
+		return grille;
+	}
+
+	public void setGrille(ArrayList<ArrayList<Case>> grille) {
+		this.grille = grille;
+	}
+
 	public void setPousseurX(int pousseurX) {
 		this.pousseurX = pousseurX;
 	}
@@ -121,7 +129,7 @@ public class Niveau {
 		this.grille.get(i).set(j, c);
 	}
 	
-	public void move(int i, int j) {  // invert i and j !!!
+	public boolean move(int i, int j) {  // invert i and j !!!
 		Case current = getCase(pousseurY, pousseurX);
 		Case future = getCase(j, i);
 		
@@ -163,9 +171,23 @@ public class Niveau {
 				setCase(pousseurY, pousseurX, Case.POUSSEUR);
 			}
 		}
+		return isLevelCleared();
 	}
 	
 	public boolean canMove(Case c) {
 		return (c != Case.CAISSE && c != Case.MUR && c != Case.CAISSE_SUR_BUT);
 	}
+	
+	public boolean isLevelCleared() {
+		boolean res = true;
+		for (int i = 0; i < grille.size(); i++) {
+			for (int j = 0; j < grille.get(i).size(); j++) {
+				if (getCase(i, j) == Case.CAISSE) {
+					res = false;
+				}
+			}
+		}
+		return res;
+	}
+	
 }
