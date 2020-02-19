@@ -59,6 +59,10 @@ public class NiveauGraphique extends JComponent {
 							in = getClass().getResourceAsStream("/images/Pousseur.png");
 							break;
 						case POUSSEUR_SUR_BUT:
+							in = getClass().getResourceAsStream("/images/But.png");
+							img = ImageIO.read(in);
+							drawable.drawImage(img, j * imgWidth, i * imgHeight, imgWidth, imgHeight, null);
+
 							in = getClass().getResourceAsStream("/images/Pousseur.png");
 							break;
 						default:

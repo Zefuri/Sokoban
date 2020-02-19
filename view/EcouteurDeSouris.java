@@ -17,10 +17,20 @@ public class EcouteurDeSouris implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		int mouseX = e.getX();
 		int mouseY = e.getY();
+	
 		
-		System.out.println("x = " + mouseX + ", y = " + mouseY);
+		int blockWidth = e.getComponent().getSize().width / jeu.niveau().getColonneMax();
+		int blockHeight = e.getComponent().getSize().height / jeu.niveau().getLignes();
 		
-		//TODO : faire la suite
+		int posX = mouseX/blockWidth;
+		int posY = mouseY/blockHeight;
+		
+		if ((posX == jeu.niveau().getPousseurX()-1 || posX == jeu.niveau().getPousseurX()+1) && (posY == jeu.niveau().getPousseurY())
+			|| (posY == jeu.niveau().getPousseurY()-1 || posY == jeu.niveau().getPousseurY()+1) && (posX == jeu.niveau().getPousseurX())) { // user clicked next to the pusher
+			
+			jeu.niveau().move(posX, posY);
+		}
+		e.getComponent().repaint();
 	}
 
 	@Override

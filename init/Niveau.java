@@ -116,4 +116,56 @@ public class Niveau {
 	public Case getCase(int i, int j) {
 		return this.grille.get(i).get(j);
 	}
+	
+	public void setCase(int i, int j, Case c) {
+		this.grille.get(i).set(j, c);
+	}
+	
+	public void move(int i, int j) {  // invert i and j !!!
+		Case current = getCase(pousseurY, pousseurX);
+		Case future = getCase(j, i);
+		
+		if (future == Case.CAISSE || future == Case.CAISSE_SUR_BUT) {
+			int nextCaisseX = i+(i-pousseurX);
+			int nextCaisseY = j+(j-pousseurY);
+			Case nextCaisse = getCase(nextCaisseY, nextCaisseX);
+			
+			if (canMove(nextCaisse)) {
+				if (future == Case.CAISSE_SUR_BUT) {
+					setCase(j, i, Case.BUT);
+				} else {
+					setCase(j, i, Case.SOL);
+				}
+				
+				if (nextCaisse == Case.BUT) {
+					setCase(nextCaisseY, nextCaisseX, Case.CAISSE_SUR_BUT);
+				} else {
+					setCase(nextCaisseY, nextCaisseX, Case.CAISSE);
+				}
+				
+				future = getCase(j, i);
+			}
+		}
+		
+		if (canMove(future)) {
+			if (current == Case.POUSSEUR_SUR_BUT) {
+				setCase(pousseurY, pousseurX, Case.BUT);
+			} else {
+				setCase(pousseurY, pousseurX, Case.SOL);
+			}
+			
+			pousseurX = i;
+			pousseurY = j;
+			
+			if (future == Case.BUT) {
+				setCase(pousseurY, pousseurX, Case.POUSSEUR_SUR_BUT);
+			} else {
+				setCase(pousseurY, pousseurX, Case.POUSSEUR);
+			}
+		}
+	}
+	
+	public boolean canMove(Case c) {
+		return (c != Case.CAISSE && c != Case.MUR && c != Case.CAISSE_SUR_BUT);
+	}
 }
