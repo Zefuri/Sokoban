@@ -16,11 +16,13 @@ import init.Jeu;
 public class NiveauGraphique extends JComponent {
 	private Jeu jeu;
 	private ArrayList<ArrayList<Case>> grilleGraphique;
+	private int sprite;
 
 	public NiveauGraphique(Jeu jeu) {
 		super();
 		this.jeu = jeu;
 		this.grilleGraphique = null;
+		this.sprite = 0;
 	}
 
 	public void resetLevel() {
@@ -65,14 +67,14 @@ public class NiveauGraphique extends JComponent {
 								in = getClass().getResourceAsStream("/images/Caisse_sur_but.png");
 								break;
 							case POUSSEUR:
-								in = getClass().getResourceAsStream("/images/Pousseur.png");
+								in = getClass().getResourceAsStream("/images/Pousseur" + sprite + ".png");
 								break;
 							case POUSSEUR_SUR_BUT:
 								in = getClass().getResourceAsStream("/images/But.png");
 								img = ImageIO.read(in);
 								drawable.drawImage(img, j * imgWidth, i * imgHeight, imgWidth, imgHeight, null);
 
-								in = getClass().getResourceAsStream("/images/Pousseur.png");
+								in = getClass().getResourceAsStream("/images/Pousseur" + sprite + ".png");
 								break;
 							default:
 								break;
@@ -85,6 +87,7 @@ public class NiveauGraphique extends JComponent {
 					drawable.drawImage(img, j * imgWidth, i * imgHeight, imgWidth, imgHeight, null);
 				}
 			}
+			sprite = sprite == 0 ? 1 : 0;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
