@@ -3,26 +3,58 @@ package view;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
-import init.Case;
-import init.Jeu;
+import model.Case;
+import model.Jeu;
 
 @SuppressWarnings("serial")
 public class NiveauGraphique extends JComponent {
 	private Jeu jeu;
 	private ArrayList<ArrayList<Case>> grilleGraphique;
-	private int sprite;
+	private boolean sprite;
+	
+	private Image imgMur;
+	private Image imgSol;
+	private Image imgBut;
+	private Image imgPousseur0;
+	private Image imgPousseur1;
+	private Image imgCaisse;
+	private Image imgCaisseSurBut;
 
-	public NiveauGraphique(Jeu jeu) {
+	public NiveauGraphique(Jeu jeu) throws IOException {
 		super();
 		this.jeu = jeu;
 		this.grilleGraphique = null;
-		this.sprite = 0;
+		this.sprite = false;
+		
+		InputStream in = null;
+		
+		in = getClass().getResourceAsStream("/view/images/Sol.png");
+		imgSol = ImageIO.read(in);
+		
+		in = getClass().getResourceAsStream("/view/images/Mur.png");
+		imgMur = ImageIO.read(in);
+		
+		in = getClass().getResourceAsStream("/view/images/But.png");
+		imgBut = ImageIO.read(in);
+		
+		in = getClass().getResourceAsStream("/view/images/Pousseur0.png");
+		imgPousseur0 = ImageIO.read(in);
+		
+		in = getClass().getResourceAsStream("/view/images/Pousseur1.png");
+		imgPousseur1 = ImageIO.read(in);
+		
+		in = getClass().getResourceAsStream("/view/images/Caisse.png");
+		imgCaisse = ImageIO.read(in);
+		
+		in = getClass().getResourceAsStream("/view/images/Caisse_sur_but.png");
+		imgCaisseSurBut = ImageIO.read(in);
 	}
 
 	public void resetLevel() {
@@ -39,7 +71,6 @@ public class NiveauGraphique extends JComponent {
 			int imgHeight = height / this.jeu.niveau().getLignes();
 
 			Image img;
-			InputStream in = null;
 
 			Case current;
 
@@ -48,48 +79,48 @@ public class NiveauGraphique extends JComponent {
 					if (j < this.jeu.niveau().getColonne(i)) {
 						current = jeu.niveau().getCase(i, j);
 
-						in = getClass().getResourceAsStream("/images/Sol.png");
-						img = ImageIO.read(in);
+						img = imgSol;
 						drawable.drawImage(img, j * imgWidth, i * imgHeight, imgWidth, imgHeight, null);
 
 						if (grilleGraphique == null || jeu.niveau().getCase(i, j) != grilleGraphique.get(i).get(j)) {
 							switch (current) {
 							case BUT:
-								in = getClass().getResourceAsStream("/images/But.png");
+								img = imgBut;
 								break;
 							case MUR:
-								in = getClass().getResourceAsStream("/images/Mur.png");
+								img = imgMur;
 								break;
 							case CAISSE:
-								in = getClass().getResourceAsStream("/images/Caisse.png");
+								img = imgCaisse;
 								break;
 							case CAISSE_SUR_BUT:
-								in = getClass().getResourceAsStream("/images/Caisse_sur_but.png");
+								img= imgCaisseSurBut;
 								break;
 							case POUSSEUR:
-								in = getClass().getResourceAsStream("/images/Pousseur" + sprite + ".png");
+								img = (sprite ? imgPousseur1 : imgPousseur0);
 								break;
 							case POUSSEUR_SUR_BUT:
-								in = getClass().getResourceAsStream("/images/But.png");
-								img = ImageIO.read(in);
+								img = imgBut;
 								drawable.drawImage(img, j * imgWidth, i * imgHeight, imgWidth, imgHeight, null);
 
-								in = getClass().getResourceAsStream("/images/Pousseur" + sprite + ".png");
+								img = (sprite ? imgPousseur1 : imgPousseur0);
 								break;
 							default:
 								break;
 							}
 						}
 					} else {
-						in = getClass().getResourceAsStream("/images/Sol.png");
+						img = imgSol;
 					}
-					img = ImageIO.read(in);
 					drawable.drawImage(img, j * imgWidth, i * imgHeight, imgWidth, imgHeight, null);
 				}
 			}
-			sprite = sprite == 0 ? 1 : 0;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void changeSprite() {
+		sprite = !sprite;
 	}
 }

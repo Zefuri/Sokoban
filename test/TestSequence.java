@@ -1,8 +1,8 @@
 package test;
 
-import structure.Sequence;
-import structure.SequenceListe;
-import structure.SequenceTableau;
+import model.artifacts.Sequence;
+import model.artifacts.SequenceListe;
+import model.artifacts.SequenceTableau;
 
 public class TestSequence {
 	

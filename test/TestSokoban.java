@@ -3,8 +3,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import global.Configuration;
-import init.*;
+
+import controller.Configuration;
+import model.LecteurNiveaux;
+import model.Niveau;
 
 public class TestSokoban {
 	public static void main(String[] args) throws IOException {
